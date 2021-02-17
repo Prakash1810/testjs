@@ -5,8 +5,13 @@ services:
 
 before_install:
 
-        - docker build -t coreapitest .
+        - docker build -t nodejstest .
 
 script:
 
-        - docker run coreapitest npm run test
+        - docker run nodejstest npm run test
+
+after_success:
+
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+        - docker push nodejstest        
