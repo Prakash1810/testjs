@@ -5,13 +5,13 @@ services:
 
 before_install:
 
-        - docker build -t $COMMIT .
+        - docker build -t $TRAVIS_JOB_ID .
 
 script:
 
-        - docker run $COMMIT npm run test
+        - docker run $TRAVIS_JOB_ID npm run test
 
 after_success:
-        - docker tag nodejstest 181098/nodejsdemo:$COMMIT 
+        - docker tag nodejstest 181098/nodejsdemo:$TRAVIS_JOB_ID 
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-        - docker push 181098/nodejsdemo:$COMMIT        
+        - docker push 181098/nodejsdemo:$TRAVIS_JOB_ID        
