@@ -5,13 +5,13 @@ services:
 
 before_install:
 
-        - docker build -t nodejstest .
+        - docker build -t $COMMIT .
 
 script:
 
-        - docker run nodejstest npm run test
+        - docker run $COMMIT npm run test
 
 after_success:
-        - docker tag nodejstest 181098/nodejsdemo:nodejstest 
+        - docker tag nodejstest 181098/nodejsdemo:$COMMIT 
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-        - docker push 181098/nodejsdemo:nodejstest        
+        - docker push 181098/nodejsdemo:$COMMIT        
