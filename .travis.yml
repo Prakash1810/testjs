@@ -12,6 +12,6 @@ script:
         - docker run $TRAVIS_JOB_ID npm run test
 
 after_success:
-        - docker tag nodejstest 181098/nodejsdemo:$TRAVIS_JOB_ID 
+        - docker tag $TRAVIS_JOB_ID 181098/nodejsdemo:$TRAVIS_JOB_ID 
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
         - docker push 181098/nodejsdemo:$TRAVIS_JOB_ID        
