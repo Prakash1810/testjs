@@ -12,6 +12,6 @@ script:
         - docker run nodejstest npm run test
 
 after_success:
-
+        - docker tag nodejstest 181098/nodejsdemo:nodejstest 
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-        - docker push nodejstest        
+        - docker push 181098/nodejsdemo:nodejstest        
